@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Cristian Pineda\\.nuget\\packages\\": {},
+    "C:\\Users\\Waldir Rosa\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Cristian Pineda\\Desktop\\Proyectos Visual\\Arboles B Grupo 3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
+      "projectUniqueName": "C:\\Users\\Waldir Rosa\\Downloads\\Arbol-B-Grupo-3-master\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
       "projectName": "Arboles B Grupo 3",
-      "projectPath": "C:\\Users\\Cristian Pineda\\Desktop\\Proyectos Visual\\Arboles B Grupo 3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
-      "packagesPath": "C:\\Users\\Cristian Pineda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Cristian Pineda\\Desktop\\Proyectos Visual\\Arboles B Grupo 3\\Arboles B Grupo 3\\obj\\",
+      "projectPath": "C:\\Users\\Waldir Rosa\\Downloads\\Arbol-B-Grupo-3-master\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
+      "packagesPath": "C:\\Users\\Waldir Rosa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Waldir Rosa\\Downloads\\Arbol-B-Grupo-3-master\\Arboles B Grupo 3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Cristian Pineda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Waldir Rosa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -32,8 +32,8 @@
         "net6.0-windows"
       ],
       "sources": {
-        "C:\\Packages": {},
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
@@ -69,7 +69,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -154,5 +154,165 @@
             iclave = medianclave;
             iclaveDhijo = nuevoNodo;
         }
+        public void Borrar(int x)
+        {
+            if (padre == null)
+            {
+                MessageBox.Show("El árbol está vacío...", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Borrar(x, padre);//borra nodo recursivamente
+
+            if (padre != null && padre.numclaves == 0)
+                /*La altura del árbol disminuyó en 1*/
+                padre = padre.hijo[0];
+        }
+
+        private void Borrar(int x, Nodo p)
+        {
+            int n = 0;
+
+            if (BuscarNodo(x, p, ref n) == true) /* clave x encontrada en Nodo p */
+            {
+                if (p.hijo[n] == null)     /* Nodo p es un Nodo hoja */
+                {
+                    BorrarByShift(p, n);
+                    return;
+                }
+                else                    /* Nodo p es un Nodo sin hoja */
+                {
+                    Nodo s = p.hijo[n];
+                    while (s.hijo[0] != null)
+                        s = s.hijo[0];
+                    p.clave[n] = s.clave[1];
+                    Borrar(s.clave[1], p.hijo[n]);
+                }
+            }
+            else /*clave x no encontrada en Nodo p */
+            {
+                if (p.hijo[n] == null) /* p es una hoja Nodo */
+                {
+                    MessageBox.Show("EL VALOR QUE DESEA ELIMINAR [" + x + "] NO EXISTE EN EL ARBOL.", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else  /* p es un Nodo que no es hoja */
+                    Borrar(x, p.hijo[n]);
+            }
+
+            if (p.hijo[n].numclaves < MIN)
+                Restaurar(p, n);
+        }
+
+        private void BorrarByShift(Nodo p, int n)
+        {
+            for (int i = n + 1; i <= p.numclaves; i++)
+            {
+                p.clave[i - 1] = p.clave[i];
+                p.hijo[i - 1] = p.hijo[i];
+            }
+            p.numclaves--;
+        }
+
+        // Llamado cuando p.hijo[n] pasa a estar bajo flujo
+        private void Restaurar(Nodo p, int n)
+        {
+            if (n != 0 && p.hijo[n - 1].numclaves > MIN)
+                PrestadoIzquierdo(p, n);
+            else if (n != p.numclaves && p.hijo[n + 1].numclaves > MIN)
+                PrestadoDerecha(p, n);
+            else
+            {
+                if (n != 0) //si hay una hermana izquierda
+                    Combinar(p, n);   // *Combinar con hermana izquierda * /
+                else
+                    Combinar(p, n + 1);  /*Combinar con el hermano derecho*/
+            }
+        }
+
+        private void PrestadoIzquierdo(Nodo p, int n)
+        {
+            Nodo bajoflujonodo = p.hijo[n];
+            Nodo hermanoizquierdo = p.hijo[n - 1];
+
+            bajoflujonodo.numclaves++;
+
+            /*Desplazar todas las claves e hijosen en underflow Nodo una posición a la derecha*/
+            for (int i = bajoflujonodo.numclaves; i > 0; i--)
+            {
+                bajoflujonodo.clave[i + 1] = bajoflujonodo.clave[i];
+                bajoflujonodo.hijo[i + 1] = bajoflujonodo.hijo[i];
+            }
+            bajoflujonodo.hijo[1] = bajoflujonodo.hijo[0];
+
+            /* Mueve la clave del separador del padre Nodo p a bajoflujonodo */
+            bajoflujonodo.clave[1] = p.clave[n];
+
+            /* Mueve la clave más a la derecha de Nodo hermanoizquierdo al padre Nodo p */
+            p.clave[n] = hermanoizquierdo.clave[hermanoizquierdo.numclaves];
+
+            /*El hijo más a la derecha de hermanoizquierdo se convierte en el hijo más a la izquierda de bajoflujonodo */
+            bajoflujonodo.hijo[0] = hermanoizquierdo.hijo[hermanoizquierdo.numclaves];
+
+            hermanoizquierdo.numclaves--;
+        }
+
+        private void PrestadoDerecha(Nodo p, int n)
+        {
+            Nodo bajoflujonodo = p.hijo[n];
+            Nodo hermanoDerecho = p.hijo[n + 1];
+
+            //Mueve la clave del separador del padre Nodo p a bajoflujonodo */
+            bajoflujonodo.numclaves++;
+            bajoflujonodo.clave[bajoflujonodo.numclaves] = p.clave[n + 1];
+
+            /* El hijo más a la izquierda de hermanoDerecho se convierte en el hijo más a la derecha de underflowNode */
+            bajoflujonodo.hijo[bajoflujonodo.numclaves] = hermanoDerecho.hijo[0];
+
+
+            /*Mueve la clave más a la izquierda de hermanoDerecho al padre Nodo p */
+            p.clave[n + 1] = hermanoDerecho.clave[1];
+            hermanoDerecho.numclaves--;
+
+            /* Cambia todas las claves e hijos de hermanoDerecho una posición a la izquierda */
+            hermanoDerecho.hijo[0] = hermanoDerecho.hijo[1];
+            for (int i = 1; i <= hermanoDerecho.numclaves; i++)
+            {
+                hermanoDerecho.clave[i] = hermanoDerecho.clave[i + 1];
+                hermanoDerecho.hijo[i] = hermanoDerecho.hijo[i + 1];
+            }
+        }
+
+        private void Combinar(Nodo p, int m)
+        {
+            Nodo NodoA = p.hijo[m - 1];
+            Nodo NodoB = p.hijo[m];
+
+            NodoA.numclaves++;
+
+            /* Mueve la clave del separador del padre Nodo p a NodoA */
+            NodoA.clave[NodoA.numclaves] = p.clave[m];
+
+
+            int i;
+            for (i = m; i < p.numclaves; i++)
+            {
+                p.clave[i] = p.clave[i + 1];
+                p.hijo[i] = p.hijo[i + 1];
+            }
+            p.numclaves--;
+
+            /* El hijo más a la izquierda de NodoB se convierte en el hijo más a la derecha de NodoA */
+            NodoA.hijo[NodoA.numclaves] = NodoB.hijo[0];
+
+            /* Inserta todas las claves e hijos de NodoB al final de NodoA */
+            for (i = 1; i <= NodoB.numclaves; i++)
+            {
+                NodoA.numclaves++;
+                NodoA.clave[NodoA.numclaves] = NodoB.clave[i];
+                NodoA.hijo[NodoA.numclaves] = NodoB.hijo[i];
+            }
+        }
+
     }
 }
