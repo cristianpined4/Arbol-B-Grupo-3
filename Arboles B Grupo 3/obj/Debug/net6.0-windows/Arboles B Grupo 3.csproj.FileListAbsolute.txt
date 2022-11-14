@@ -1,0 +1,34 @@
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.exe
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.deps.json
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.runtimeconfig.json
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.dll
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.pdb
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.csproj.AssemblyReference.cache
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles_B_Grupo_3.Form1.resources
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.csproj.GenerateResource.cache
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.AssemblyInfoInputs.cache
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.AssemblyInfo.cs
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.csproj.CoreCompileInputs.cache
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.dll
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\refint\Arboles B Grupo 3.dll
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.pdb
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.genruntimeconfig.cache
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\ref\Arboles B Grupo 3.dll
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.exe
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.deps.json
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.runtimeconfig.json
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.dll
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\bin\Debug\net6.0-windows\Arboles B Grupo 3.pdb
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.csproj.AssemblyReference.cache
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles_B_Grupo_3.Form1.resources
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.csproj.GenerateResource.cache
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.AssemblyInfoInputs.cache
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.AssemblyInfo.cs
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.csproj.CoreCompileInputs.cache
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.dll
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\refint\Arboles B Grupo 3.dll
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.pdb
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.genruntimeconfig.cache
+C:\Users\Cristian Pineda\Desktop\Proyectos Visual\Arboles B Grupo 3\Arboles B Grupo 3\obj\Debug\net6.0-windows\ref\Arboles B Grupo 3.dll
