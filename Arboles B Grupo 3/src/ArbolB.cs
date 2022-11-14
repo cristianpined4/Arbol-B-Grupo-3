@@ -6,12 +6,74 @@
         private static readonly int MAX = M - 1;//máximo de clave en cada página
         //Ceiling Devuelve el valor integral más pequeño que es mayor o igual que el número decimal especificado.
         private static readonly int MIN = (int)Math.Ceiling((double)M / 2) - 1;
+        // Todos los archivos ira a una carpeta dentro del proyecto llamada Archivos
+        public string[] path = new string[] { }; // Donde se guardaran las rutas de los archivos
 
         private Nodo padre;//Nodo padre
 
         public ArbolB()//Contructor
         {
             padre = null;//nodo padre inicializa en null
+        }
+
+        // Funcion para guardar las hojas en los archivos
+        // Parametros:
+        //    - Nodo padre
+        //    - Un contador para indica el numero de hoja (PUEDE CAMBIAR ESTE PARAMETRO)
+        public void guardarEnArchivo(Nodo padre, int archivoNum)
+        {
+            if (padre != null)
+            {
+                string text = "";
+                for (int i = 1; i <= padre.numclaves; i++)
+                {
+                    text += padre.clave[i] + ","; // Recorremos las claves para que de guarden asi 1,2,3,
+                    //escribir.Write(padre.clave[i] + ","); ; // Recorremos las claves para que de guarden asi 1,2,3,
+                }
+                text = text.TrimEnd(','); // Se elimina el ultimo , para que quede 1,2,3
+                string pathFile = "../../Archivos/Hoja-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
+                File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente
+
+                for (int i = 0; i <= padre.numclaves; i++)
+                {
+                    archivoNum++;
+                    guardarEnArchivo(padre.hijo[i], archivoNum);
+                }
+            }
+        }
+
+        public void crearArchivos()
+        {
+            /** CODIGO INCORPORADO CRISTIAN, CREACION ARCHIVO Y ELIMINACIO ARCHIVO - INICIO **/
+            // PUEDE CAMBIAR DE POSICION PARA EJECUTARSE ESTAS FUNCIONES
+            borrarArchivos();
+            guardarEnArchivo(padre, 1);
+            /** CODIGO INCORPORADO CRISTIAN, CREACION ARCHIVO Y ELIMINACION ARCHIVO - FIN **/
+        }
+
+        // Funcion para eliminar los archivos del directorio y array path
+        public void borrarArchivos()
+        {
+            if (path.Length != 0) // Se elimina los archivos si hay algo en el array path
+            {
+                foreach (string fileName in path)
+                {
+                    if (File.Exists(fileName))
+                    {
+                        File.Delete(fileName); // Recorre el array y se elimina cada archivo
+                    }
+                }
+                Array.Clear(path, 0, path.Length);// Se elimina el contenido del array path
+            }
+            else // Se busca eliminar directamente del diretorio de un solo(ESTO ES CUANDO INICIA Y NO HAY NADA ALMACENADO EN MEMORIA SE ELIMINA TODO DE UN INICIO,RUTA VACIA)
+            {
+                DirectoryInfo di = new DirectoryInfo("../../Archivos"); // Se obtiene la info de la ruta
+                FileInfo[] files = di.GetFiles(); // Se obtiene todos los archivos que hay en la ruta y se carga en un arreglo de archivos
+                foreach (FileInfo file in files)
+                {
+                    file.Delete(); // Se recorre y se elimina cada archivo
+                }
+            }
         }
 
         public void Insert(int x)//ingresar una clave al arbol b
