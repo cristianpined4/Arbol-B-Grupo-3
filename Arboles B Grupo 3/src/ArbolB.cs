@@ -8,6 +8,7 @@
         private static readonly int MIN = (int)Math.Ceiling((double)M / 2) - 1;
         // Todos los archivos ira a una carpeta dentro del proyecto llamada Archivos
         public string[] path = new string[] { }; // Donde se guardaran las rutas de los archivos
+        private int posAnteriorX;
 
         private Nodo padre;//Nodo padre
 
@@ -41,7 +42,123 @@
                 }
             }
         }
+        /*++++++++++++FUNCIONES PARA DIBUJAR EL ÁRBOL +++++++++++++*/
+        private int CoordenadaX;
+        private int CoordenadaY;
 
+        public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente, Pen lapiz)//metodo  que llama a metodo mostrar esto es para encapsular mas.
+        {
+            Mostrar(padre, 0, grafo, Relleno, rect, fuente, 1, lapiz, false, true);
+            posAnteriorX = rect.X;
+        }
+
+        private void Mostrar(Nodo p, int masX, Graphics g, Brush Relleno, Rectangle rect, Font fuente, int pagActual, Pen lapiz, bool izq, bool dere)// recibe nodo y espacios entre nodos o paginas
+        {
+            if (p != null)// si el nodo es diferente de nulo
+            {
+
+                g.DrawString("Claves: " + p.numclaves.ToString(), fuente, Brushes.Black, rect.X + rect.Width - 65, rect.Y - 40);
+                Rectangle[] arrayRect = new Rectangle[p.numclaves];//Arreglo de rectángulos que almacena las posiciones y tamaños de todos los nodos
+                arrayRect[0] = rect;//Se almacena el primer rectángulo que se trae desde "form1" y a partir de él se debujarán los demás hacia la derecha
+
+                int i;
+                for (i = 0; i < p.numclaves; i++)// recorre las claves que hay en cada pagina
+                {
+
+                    ///----> CREA Y DIBUJA LOS RECTANGULOS DE LA PÁGINA ACTUAL
+                    //A partir de la segunda iteración se empiezan a crear todos los rectángulos partiendo de las coordenadas y tamaños del primer rectángulo
+                    if (izq)
+                    {
+                        if (i >= 1)
+                        {
+                            arrayRect[i] = new Rectangle(arrayRect[i - 1].X - arrayRect[i - 1].Width, arrayRect[i - 1].Y, arrayRect[i - 1].Width, arrayRect[i - 1].Height);
+                        }
+
+                        //Se dibuja el rectángulo
+                        g.DrawRectangle(Pens.Black, arrayRect[i]);
+                        //Se rellena de color
+                        g.FillRectangle(Relleno, arrayRect[i]);
+                    }
+                    else //if (dere && izq == false)
+                    {
+                        if (i >= 1)
+                        {
+                            arrayRect[i] = new Rectangle(arrayRect[i - 1].X + arrayRect[i - 1].Width, arrayRect[i - 1].Y, arrayRect[i - 1].Width, arrayRect[i - 1].Height);
+                        }
+
+                        //Se dibuja el rectángulo
+                        g.DrawRectangle(Pens.Black, arrayRect[i]);
+                        //Se rellena de color
+                        g.FillRectangle(Relleno, arrayRect[i]);
+                    }
+
+                    ///----> DIBUJA LA CLAVE EN MEDIO DE CADA RECTANGULO
+                    if (p.clave[i + 1] < 10)//Si la clave a dibujar es menor que 10, cambia las coordenadas para que se muestre más en medio del cuadro
+                    {
+                        //Dibuja la clave
+                        g.DrawString(p.clave[i + 1].ToString(), fuente, Brushes.Black, arrayRect[i].X + ((arrayRect[i].Width / 2) - 10), arrayRect[i].Y + ((arrayRect[i].Height / 2) - 13));
+                    }
+                    else//Si el dato es mayor o igual a 10, dado que son dos números y cubren más espacio, se cambian las coordenadas en
+                        //las que se dibujará la clave
+                    {
+
+                        g.DrawString(p.clave[i + 1].ToString(), fuente, Brushes.Black, arrayRect[i].X + ((arrayRect[i].Width / 2) - 18), arrayRect[i].Y + ((arrayRect[i].Height / 2) - 13));
+                    }
+                }
+
+                ///---> CAMBIA DE PÁGINA? Y DA UN SALTO DE LINEA PARA DIBUJAR LOS HIJOS ABAJO (HAY QUE MODIFICAR POSICION EN Y)
+                //Console.Write("\n");//da un espacio por página
+                rect.Y += 80;
+
+                for (i = 0; i <= p.numclaves; i++)//este for recorre las paginas hijas para mostrar las claves
+                {
+                    if (p.numclaves > 1)
+                    {
+                        if (i == 0)
+                        {
+                            rect.X -= 160;
+                            posAnteriorX = rect.X;
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, true, false);// muestra las claves de las  páginas hijas
+                        }
+                        else if (i == 1)
+                        {
+                            rect.X += 260;
+                            posAnteriorX = rect.X;
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, true);// muestra las claves de las  páginas hijas
+                        }
+                        else
+                        {
+                            rect.X += 200;
+                            posAnteriorX = rect.X;
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, false);// muestra las claves de las  páginas hijas
+
+                        }
+                    }
+                    else
+                    {
+                        if (i == 0)
+                        {
+                            rect.X -= 160;
+                            posAnteriorX = rect.X;
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, true, false);// muestra las claves de las  páginas hijas
+                        }
+                        else if (i == 1)
+                        {
+                            rect.X += 100;
+                            posAnteriorX = rect.X;
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, true);// muestra las claves de las  páginas hijas
+                        }
+                        else
+                        {
+                            rect.X += 200;
+                            posAnteriorX = rect.X;
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, false);// muestra las claves de las  páginas hijas
+
+                        }
+                    }
+                }
+            }
+        }
         public void crearArchivos()
         {
             /** CODIGO INCORPORADO CRISTIAN, CREACION ARCHIVO Y ELIMINACIO ARCHIVO - INICIO **/

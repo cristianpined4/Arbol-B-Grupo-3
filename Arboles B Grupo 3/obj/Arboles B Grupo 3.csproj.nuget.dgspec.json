@@ -1,28 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ever Vásquez\\Documents\\Git_projects\\Proyecto_ESD\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj": {}
+    "C:\\Users\\DESKTOP-PC\\Documents\\trabajo\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ever Vásquez\\Documents\\Git_projects\\Proyecto_ESD\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj": {
+    "C:\\Users\\DESKTOP-PC\\Documents\\trabajo\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ever Vásquez\\Documents\\Git_projects\\Proyecto_ESD\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
+        "projectUniqueName": "C:\\Users\\DESKTOP-PC\\Documents\\trabajo\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
         "projectName": "Arboles B Grupo 3",
-        "projectPath": "C:\\Users\\Ever Vásquez\\Documents\\Git_projects\\Proyecto_ESD\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
-        "packagesPath": "C:\\Users\\Ever Vásquez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ever Vásquez\\Documents\\Git_projects\\Proyecto_ESD\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\obj\\",
+        "projectPath": "C:\\Users\\DESKTOP-PC\\Documents\\trabajo\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\Arboles B Grupo 3.csproj",
+        "packagesPath": "C:\\Users\\DESKTOP-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DESKTOP-PC\\Documents\\trabajo\\Arbol-B-Grupo-3\\Arboles B Grupo 3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Ever Vásquez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DESKTOP-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net6.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -49,8 +49,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -62,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

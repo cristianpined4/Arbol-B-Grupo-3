@@ -28,7 +28,7 @@ namespace Arboles_B_Grupo_3
                     arbolB.Insert(clave);
                     guardar = true;//Pone en true para que se pueda pintar el la página
                     Refresh();//Refresca el formulario (Llama a la función que permite pintar la página)
-
+                    
                     txtClave.Clear();//Limpia las cajas de texto
                     this.Cursor = Cursors.Default;
                 }
