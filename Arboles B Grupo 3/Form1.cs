@@ -92,8 +92,10 @@ namespace Arboles_B_Grupo_3
 
             if (guardar)//Si ya se almacenó una nueva clave, da paso a pintar ó actualizar el árbol
             {
-                ///<!----> ACÁ VA EL CÓDIGO PARA PINTAR O ACTUALIZAR EL ARBOL-B <!---->
-                ///
+                Rectangle rect = new Rectangle(500, 100, 30, 30);//Propiedades del cuadro donde se dibujará la clave
+                Font fuente = new Font("Arial", 14);//Fuente para dibujar la clave
+                //Llama a la función dibujar del árbol_B y pasa los parámetros necesarios
+                arbolB.Mostrar(g, Brushes.YellowGreen, rect, fuente);
 
                 guardar = false;//Reinicia guardar a false para esperar una nueva clave
             }
@@ -104,7 +106,7 @@ namespace Arboles_B_Grupo_3
             if (txtClave.Text != "")//Verifica si las cajas de texto están llenas
             {
                 clave = int.Parse(txtClave.Text);
-                if (clave > 0 && clave < 100)
+                if (clave > 0 && clave < 100)//Valida que solo sean permitidos valores de 1  a 99
                 {
                     this.Cursor = Cursors.AppStarting;
                     arbolB.Borrar(clave);
@@ -130,8 +132,8 @@ namespace Arboles_B_Grupo_3
 
         private void btnRecargar_Click(object sender, EventArgs e)
         {
-            guardar = true;
-            Refresh();
+            guardar = true;//Pone en true la variable sentinela para que se permita pintar
+            Refresh();//Invoca a la función paint
             txtClave.Focus();
         }
 

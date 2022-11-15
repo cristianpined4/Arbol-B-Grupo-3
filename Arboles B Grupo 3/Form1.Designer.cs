@@ -86,7 +86,7 @@
             this.btnEliminar.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEliminar.Image = global::Arboles_B_Grupo_3.Properties.Resources.ElimNodo;
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEliminar.Location = new System.Drawing.Point(1112, 99);
+            this.btnEliminar.Location = new System.Drawing.Point(1112, 88);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(103, 28);
@@ -97,6 +97,7 @@
             // 
             // btnRecargar
             // 
+            this.btnRecargar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRecargar.Image = global::Arboles_B_Grupo_3.Properties.Resources.reload;
             this.btnRecargar.Location = new System.Drawing.Point(1221, 58);
             this.btnRecargar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -119,8 +120,8 @@
             this.Controls.Add(this.lblClave);
             this.Controls.Add(this.txtClave);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Árboles-B";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();

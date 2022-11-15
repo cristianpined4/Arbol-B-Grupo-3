@@ -6,9 +6,9 @@
         private static readonly int MAX = M - 1;//máximo de clave en cada página
         //Ceiling Devuelve el valor integral más pequeño que es mayor o igual que el número decimal especificado.
         private static readonly int MIN = (int)Math.Ceiling((double)M / 2) - 1;
+        private Rectangle[] arrayRect;//Arreglo de rectángulos que permiten dibujar el cuadro donde están las claves
         // Todos los archivos ira a una carpeta dentro del proyecto llamada Archivos
         public string[] path = new string[] { }; // Donde se guardaran las rutas de los archivos
-        private int posAnteriorX;
 
         private Nodo padre;//Nodo padre
 
@@ -29,145 +29,17 @@
                 for (int i = 1; i <= padre.numclaves; i++)
                 {
                     text += padre.clave[i] + ","; // Recorremos las claves para que de guarden asi 1,2,3,
-                    //escribir.Write(padre.clave[i] + ","); ; // Recorremos las claves para que de guarden asi 1,2,3,
                 }
                 text = text.TrimEnd(','); // Se elimina el ultimo , para que quede 1,2,3
-                string pathFile = "../../Archivos/Hoja-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
+                string pathFile = "../../../Archivos/Hoja-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
                 File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente
 
-                for (int i = 0; i <= padre.numclaves; i++)
+                for (int i = 0; i <= padre.numclaves; i++)//Hace un recorrido en todas las claves de la página
                 {
-                    archivoNum++;
-                    guardarEnArchivo(padre.hijo[i], archivoNum);
+                    archivoNum++;//Iterador que permite nombrar el archivo según su número de página
+                    guardarEnArchivo(padre.hijo[i], archivoNum);//Para cada clave se llama a la función y se pasa como parámetro la página hija
                 }
             }
-        }
-        /*++++++++++++FUNCIONES PARA DIBUJAR EL ÁRBOL +++++++++++++*/
-        private int CoordenadaX;
-        private int CoordenadaY;
-
-        public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente, Pen lapiz)//metodo  que llama a metodo mostrar esto es para encapsular mas.
-        {
-            Mostrar(padre, 0, grafo, Relleno, rect, fuente, 1, lapiz, false, true);
-            posAnteriorX = rect.X;
-            borrarArchivos();
-            guardarEnArchivo(padre, 1);
-        }
-
-        private void Mostrar(Nodo p, int masX, Graphics g, Brush Relleno, Rectangle rect, Font fuente, int pagActual, Pen lapiz, bool izq, bool dere)// recibe nodo y espacios entre nodos o paginas
-        {
-            if (p != null)// si el nodo es diferente de nulo
-            {
-
-                g.DrawString("Claves: " + p.numclaves.ToString(), fuente, Brushes.Black, rect.X + rect.Width - 65, rect.Y - 40);
-                Rectangle[] arrayRect = new Rectangle[p.numclaves];//Arreglo de rectángulos que almacena las posiciones y tamaños de todos los nodos
-                arrayRect[0] = rect;//Se almacena el primer rectángulo que se trae desde "form1" y a partir de él se debujarán los demás hacia la derecha
-
-                int i;
-                for (i = 0; i < p.numclaves; i++)// recorre las claves que hay en cada pagina
-                {
-
-                    ///----> CREA Y DIBUJA LOS RECTANGULOS DE LA PÁGINA ACTUAL
-                    //A partir de la segunda iteración se empiezan a crear todos los rectángulos partiendo de las coordenadas y tamaños del primer rectángulo
-                    if (izq)
-                    {
-                        if (i >= 1)
-                        {
-                            arrayRect[i] = new Rectangle(arrayRect[i - 1].X - arrayRect[i - 1].Width, arrayRect[i - 1].Y, arrayRect[i - 1].Width, arrayRect[i - 1].Height);
-                        }
-
-                        //Se dibuja el rectángulo
-                        g.DrawRectangle(Pens.Black, arrayRect[i]);
-                        //Se rellena de color
-                        g.FillRectangle(Relleno, arrayRect[i]);
-                    }
-                    else //if (dere && izq == false)
-                    {
-                        if (i >= 1)
-                        {
-                            arrayRect[i] = new Rectangle(arrayRect[i - 1].X + arrayRect[i - 1].Width, arrayRect[i - 1].Y, arrayRect[i - 1].Width, arrayRect[i - 1].Height);
-                        }
-
-                        //Se dibuja el rectángulo
-                        g.DrawRectangle(Pens.Black, arrayRect[i]);
-                        //Se rellena de color
-                        g.FillRectangle(Relleno, arrayRect[i]);
-                    }
-
-                    ///----> DIBUJA LA CLAVE EN MEDIO DE CADA RECTANGULO
-                    if (p.clave[i + 1] < 10)//Si la clave a dibujar es menor que 10, cambia las coordenadas para que se muestre más en medio del cuadro
-                    {
-                        //Dibuja la clave
-                        g.DrawString(p.clave[i + 1].ToString(), fuente, Brushes.Black, arrayRect[i].X + ((arrayRect[i].Width / 2) - 10), arrayRect[i].Y + ((arrayRect[i].Height / 2) - 13));
-                    }
-                    else//Si el dato es mayor o igual a 10, dado que son dos números y cubren más espacio, se cambian las coordenadas en
-                        //las que se dibujará la clave
-                    {
-
-                        g.DrawString(p.clave[i + 1].ToString(), fuente, Brushes.Black, arrayRect[i].X + ((arrayRect[i].Width / 2) - 18), arrayRect[i].Y + ((arrayRect[i].Height / 2) - 13));
-                    }
-                }
-
-                ///---> CAMBIA DE PÁGINA? Y DA UN SALTO DE LINEA PARA DIBUJAR LOS HIJOS ABAJO (HAY QUE MODIFICAR POSICION EN Y)
-                //Console.Write("\n");//da un espacio por página
-                rect.Y += 80;
-
-                for (i = 0; i <= p.numclaves; i++)//este for recorre las paginas hijas para mostrar las claves
-                {
-                    if (p.numclaves > 1)
-                    {
-                        if (i == 0)
-                        {
-                            rect.X -= 160;
-                            posAnteriorX = rect.X;
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, true, false);// muestra las claves de las  páginas hijas
-                        }
-                        else if (i == 1)
-                        {
-                            rect.X += 260;
-                            posAnteriorX = rect.X;
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, true);// muestra las claves de las  páginas hijas
-                        }
-                        else
-                        {
-                            rect.X += 200;
-                            posAnteriorX = rect.X;
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, false);// muestra las claves de las  páginas hijas
-
-                        }
-                    }
-                    else
-                    {
-                        if (i == 0)
-                        {
-                            rect.X -= 160;
-                            posAnteriorX = rect.X;
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, true, false);// muestra las claves de las  páginas hijas
-                        }
-                        else if (i == 1)
-                        {
-                            rect.X += 100;
-                            posAnteriorX = rect.X;
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, true);// muestra las claves de las  páginas hijas
-                        }
-                        else
-                        {
-                            rect.X += 200;
-                            posAnteriorX = rect.X;
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente, pagActual + 1, lapiz, false, false);// muestra las claves de las  páginas hijas
-
-                        }
-                    }
-                }
-            }
-        }
-        public void crearArchivos()
-        {
-            /** CODIGO INCORPORADO CRISTIAN, CREACION ARCHIVO Y ELIMINACIO ARCHIVO - INICIO **/
-            // PUEDE CAMBIAR DE POSICION PARA EJECUTARSE ESTAS FUNCIONES
-            borrarArchivos();
-            guardarEnArchivo(padre, 1);
-            /** CODIGO INCORPORADO CRISTIAN, CREACION ARCHIVO Y ELIMINACION ARCHIVO - FIN **/
         }
 
         // Funcion para eliminar los archivos del directorio y array path
@@ -186,7 +58,7 @@
             }
             else // Se busca eliminar directamente del diretorio de un solo(ESTO ES CUANDO INICIA Y NO HAY NADA ALMACENADO EN MEMORIA SE ELIMINA TODO DE UN INICIO,RUTA VACIA)
             {
-                DirectoryInfo di = new DirectoryInfo("../../Archivos"); // Se obtiene la info de la ruta
+                DirectoryInfo di = new DirectoryInfo("../../../Archivos"); // Se obtiene la info de la ruta
                 FileInfo[] files = di.GetFiles(); // Se obtiene todos los archivos que hay en la ruta y se carga en un arreglo de archivos
                 foreach (FileInfo file in files)
                 {
@@ -232,6 +104,92 @@
                 return true;//retorna true(se llama en el metodo buscar)
             else
                 return false;//sino false
+        }
+
+        /// <!----> FUNCIONES PARA DIBUJAR EL ARBOL <!---->
+
+        public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente)//metodo  que llama a metodo mostrar esto es para encapsular mas.
+        {
+            Mostrar(padre, 0, grafo, Relleno, rect, fuente);
+            borrarArchivos();
+            guardarEnArchivo(padre, 1);
+        }
+
+        private void Mostrar(Nodo p, int masX, Graphics g, Brush Relleno, Rectangle rect, Font fuente)// recibe nodo y espacios entre nodos o paginas
+        {
+            if (p != null)// si el nodo es diferente de nulo
+            {
+                arrayRect = new Rectangle[p.numclaves];//Arreglo de rectángulos que almacena las posiciones y tamaños de todos los nodos
+                arrayRect[0] = rect;//Se almacena el primer rectángulo que se trae desde "form1" y a partir de él se debujarán los demás hacia la derecha
+
+                int i;
+                for (i = 0; i < p.numclaves; i++)// recorre las claves que hay en cada pagina
+                {
+                    ///----> CREA Y DIBUJA LOS RECTANGULOS DE LA PÁGINA ACTUAL
+                    //A partir de la segunda iteración se empiezan a crear todos los rectángulos partiendo de las coordenadas y tamaños del primer rectángulo
+                    if (i >= 1)
+                    {
+                        arrayRect[i] = new Rectangle(arrayRect[i - 1].X + arrayRect[i - 1].Width, arrayRect[i - 1].Y, arrayRect[i - 1].Width, arrayRect[i - 1].Height);
+                    }
+
+                    //Se dibuja el rectángulo
+                    g.DrawRectangle(Pens.Black, arrayRect[i]);
+                    //Se rellena de color
+                    g.FillRectangle(Relleno, arrayRect[i]);
+
+                    ///----> DIBUJA LA CLAVE EN MEDIO DE CADA RECTANGULO
+                    if (p.clave[i + 1] < 10)//Si la clave a dibujar es menor que 10, cambia las coordenadas para que se muestre más en medio del cuadro
+                    {
+                        //Dibuja la clave
+                        g.DrawString(p.clave[i + 1].ToString(), fuente, Brushes.Black, arrayRect[i].X + ((arrayRect[i].Width / 2) - 8), arrayRect[i].Y + ((arrayRect[i].Height / 2) - 11));
+                    }
+                    else//Si el dato es mayor o igual a 10, dado que son dos números y cubren más espacio, se cambian las coordenadas en
+                        //las que se dibujará la clave
+                    {
+
+                        g.DrawString(p.clave[i + 1].ToString(), fuente, Brushes.Black, arrayRect[i].X + ((arrayRect[i].Width / 2) - 14), arrayRect[i].Y + ((arrayRect[i].Height / 2) - 11));
+                    }
+
+                }
+
+                rect.Y += 100;//Aumenta en Y el rectángulo para que los demás se dibujem más abajo
+
+                for (i = 0; i <= p.numclaves; i++)//este for recorre las paginas hijas para mostrar las claves
+                {
+                    if (p.numclaves > 1)//Caso en que hayan más de una clave en la hoja
+                    {
+                        if (i == 0)//Página derecha
+                        {
+                            rect.X -= 180;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                        }
+                        else if (i == 1)//Página central
+                        {
+                            rect.X += 180;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                        }
+                        else//Página izquierda
+                        {
+                            rect.X += 180;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+
+                        }
+                    }
+                    else//En caso que no, que solo
+                    {
+                        if (i == 0)//Página derecha
+                        {
+                            rect.X -= 240;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                        }
+                        else if (i == 1)//Página izquierda
+                        {
+                            rect.X += 450;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
+                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                        }
+                    }
+                }
+            }
         }
 
         private bool Insert(int x, Nodo p, ref int iclave, ref Nodo iclaveDhijo)
