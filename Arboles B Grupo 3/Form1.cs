@@ -127,5 +127,14 @@ namespace Arboles_B_Grupo_3
             }
             txtClave.Focus();
         }
+
+        private void btnRecargar_Click(object sender, EventArgs e)
+        {
+            guardar = true;
+            Refresh();
+            txtClave.Focus();
+        }
+
+        
     }
 }

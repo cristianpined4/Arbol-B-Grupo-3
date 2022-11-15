@@ -50,6 +50,8 @@
         {
             Mostrar(padre, 0, grafo, Relleno, rect, fuente, 1, lapiz, false, true);
             posAnteriorX = rect.X;
+            borrarArchivos();
+            guardarEnArchivo(padre, 1);
         }
 
         private void Mostrar(Nodo p, int masX, Graphics g, Brush Relleno, Rectangle rect, Font fuente, int pagActual, Pen lapiz, bool izq, bool dere)// recibe nodo y espacios entre nodos o paginas
