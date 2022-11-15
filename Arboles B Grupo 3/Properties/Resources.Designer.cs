@@ -73,6 +73,16 @@ namespace Arboles_B_Grupo_3.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BuscarNodo {
+            get {
+                object obj = ResourceManager.GetObject("BuscarNodo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ElimNodo {
             get {
                 object obj = ResourceManager.GetObject("ElimNodo", resourceCulture);

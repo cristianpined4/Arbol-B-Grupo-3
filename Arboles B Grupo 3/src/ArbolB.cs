@@ -32,7 +32,7 @@
                 }
                 text = text.TrimEnd(','); // Se elimina el ultimo , para que quede 1,2,3
                 string pathFile = "../../../Archivos/Hoja-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
-                //File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente //seleecc
+                File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente //seleecc
 
                 for (int i = 0; i <= padre.numclaves; i++)//Hace un recorrido en todas las claves de la página
                 {
@@ -111,7 +111,7 @@
         public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente)//metodo  que llama a metodo mostrar esto es para encapsular mas.
         {
             Mostrar(padre, 0, grafo, Relleno, rect, fuente);
-            //borrarArchivos();
+            borrarArchivos();
             guardarEnArchivo(padre, 1);
         }
 
