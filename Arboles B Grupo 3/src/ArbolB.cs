@@ -32,7 +32,7 @@
                 }
                 text = text.TrimEnd(','); // Se elimina el ultimo , para que quede 1,2,3
                 string pathFile = "../../../Archivos/Hoja-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
-                File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente
+                //File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente //seleecc
 
                 for (int i = 0; i <= padre.numclaves; i++)//Hace un recorrido en todas las claves de la página
                 {
@@ -41,7 +41,7 @@
                 }
             }
         }
-
+        
         // Funcion para eliminar los archivos del directorio y array path
         public void borrarArchivos()
         {
@@ -66,7 +66,7 @@
                 }
             }
         }
-
+        
         public void Insert(int x)//ingresar una clave al arbol b
         {
             int iclave = 0;//clave inicial en cero
@@ -87,7 +87,7 @@
         }
 
         //este metodo busca la clave dentro de una página en particular
-        private bool BuscarNodo(int x, Nodo p, ref int n)
+        public bool BuscarNodo(int x, Nodo p, ref int n)
         {
             if (x < p.clave[1])// verifica si la clave x es menor que la clave 
             {
@@ -111,7 +111,7 @@
         public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente)//metodo  que llama a metodo mostrar esto es para encapsular mas.
         {
             Mostrar(padre, 0, grafo, Relleno, rect, fuente);
-            borrarArchivos();
+            //borrarArchivos();
             guardarEnArchivo(padre, 1);
         }
 
@@ -342,6 +342,26 @@
             if (p.hijo[n].numclaves < MIN)
                 Restaurar(p, n);
         }
+
+        public bool Buscar(int x)//metodo que busca  una clave entera en el árbol
+        {
+            if (Buscar(x, padre) == null)// de forma recursiva busca la clave en el árbol(aca se utiliza el metodo buscar que tiene dos parametros, es e qu esta bajo)
+                return false;// si buscar retorna null significa que no se encontro el nodo
+            return true;// si buscar retorna true significa que el nodo se encuentra en el árbol
+        }
+
+        private Nodo Buscar(int x, Nodo p)//este metodo es el que recorre el arbol y busca la clave 
+        {
+            if (p == null)       /*clave x no presente en el árbol*/
+                return null;//retorna null
+
+            int n = 0;// n es el primer nivel del arbol que corresponde al nodo padre
+            if (BuscarNodo(x, p, ref n) == true) //busca la clave x en un nodo o pagina, se usa el metodo de abajo
+                return p;// retorna la pagina o nodo donde se encontro la clave
+
+            return Buscar(x, p.hijo[n]); /* Buscar en Nodo p.hijo[n] */
+        }
+        //este metodo busca la clave dentro de una página en particular
 
         private void BorrarByShift(Nodo p, int n)
         {
