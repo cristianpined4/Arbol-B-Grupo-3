@@ -8,7 +8,7 @@
         private static readonly int MIN = (int)Math.Ceiling((double)M / 2) - 1;
         private Rectangle[] arrayRect;//Arreglo de rectángulos que permiten dibujar el cuadro donde están las claves
         // Todos los archivos ira a una carpeta dentro del proyecto llamada Archivos
-        public string[] path = new string[] { }; // Donde se guardaran las rutas de los archivos
+        private int archivoNum;//Iterador que permite nombrar el archivo según su número de página (Ayuda en la función de "guardarEnArchivo")
 
         private Nodo padre;//Nodo padre
 
@@ -17,27 +17,28 @@
             padre = null;//nodo padre inicializa en null
         }
 
+        /// <!----> FUNCIONES PARA DCREAR LOS ARCHIVOS POR CADA PAGINA <!---->
+
         // Funcion para guardar las hojas en los archivos
         // Parametros:
         //    - Nodo padre
-        //    - Un contador para indica el numero de hoja (PUEDE CAMBIAR ESTE PARAMETRO)
-        public void guardarEnArchivo(Nodo padre, int archivoNum)
+        public void guardarEnArchivo(Nodo padre)
         {
             if (padre != null)
             {
+                archivoNum += 1;
                 string text = "";
                 for (int i = 1; i <= padre.numclaves; i++)
                 {
                     text += padre.clave[i] + ","; // Recorremos las claves para que de guarden asi 1,2,3,
                 }
                 text = text.TrimEnd(','); // Se elimina el ultimo , para que quede 1,2,3
-                string pathFile = "../../../Archivos/Hoja-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
+                string pathFile = "../../../Archivos/Página-" + archivoNum + ".txt"; // Se crea la direccion donde se guardad con el nombre hoja-$indice.txt
                 File.WriteAllText(pathFile, text); // Se guarda la informacion del texto y se crea el archivo es la direccion definida anteriomente //seleecc
 
                 for (int i = 0; i <= padre.numclaves; i++)//Hace un recorrido en todas las claves de la página
                 {
-                    archivoNum++;//Iterador que permite nombrar el archivo según su número de página
-                    guardarEnArchivo(padre.hijo[i], archivoNum);//Para cada clave se llama a la función y se pasa como parámetro la página hija
+                    guardarEnArchivo(padre.hijo[i]);//Para cada clave se llama a la función y se pasa como parámetro la página hija
                 }
             }
         }
@@ -45,45 +46,33 @@
         // Funcion para eliminar los archivos del directorio y array path
         public void borrarArchivos()
         {
-            if (path.Length != 0) // Se elimina los archivos si hay algo en el array path
+            DirectoryInfo di = new DirectoryInfo("../../../Archivos"); // Se obtiene la info de la ruta
+            FileInfo[] files = di.GetFiles(); // Se obtiene todos los archivos que hay en la ruta y se carga en un arreglo de archivos
+            foreach (FileInfo file in files)
             {
-                foreach (string fileName in path)
-                {
-                    if (File.Exists(fileName))
-                    {
-                        File.Delete(fileName); // Recorre el array y se elimina cada archivo
-                    }
-                }
-                Array.Clear(path, 0, path.Length);// Se elimina el contenido del array path
-            }
-            else // Se busca eliminar directamente del diretorio de un solo(ESTO ES CUANDO INICIA Y NO HAY NADA ALMACENADO EN MEMORIA SE ELIMINA TODO DE UN INICIO,RUTA VACIA)
-            {
-                DirectoryInfo di = new DirectoryInfo("../../../Archivos"); // Se obtiene la info de la ruta
-                FileInfo[] files = di.GetFiles(); // Se obtiene todos los archivos que hay en la ruta y se carga en un arreglo de archivos
-                foreach (FileInfo file in files)
-                {
-                    file.Delete(); // Se recorre y se elimina cada archivo
-                }
+                file.Delete(); // Se recorre y se elimina cada archivo
             }
         }
-        
-        public void Insert(int x)//ingresar una clave al arbol b
+
+        /// <!----> FUNCIONES PARA BUSCARL <!---->
+
+        public bool Buscar(int x)//metodo que busca  una clave entera en el árbol
         {
-            int iclave = 0;//clave inicial en cero
-            Nodo iclaveDhijo = null;//clave hijos en null
+            if (Buscar(x, padre) == null)// de forma recursiva busca la clave en el árbol(aca se utiliza el metodo buscar que tiene dos parametros, es e qu esta bajo)
+                return false;// si buscar retorna null significa que no se encontro el nodo
+            return true;// si buscar retorna true significa que el nodo se encuentra en el árbol
+        }
 
-            bool agregar = Insert(x, padre, ref iclave, ref iclaveDhijo);//metodo recursivo inserta la clave
+        private Nodo Buscar(int x, Nodo p)//este metodo es el que recorre el arbol y busca la clave 
+        {
+            if (p == null)       /*clave x no presente en el árbol*/
+                return null;//retorna null
 
-            if (agregar)  /* Altura aumentada en uno, hay que crear nueva pagina en el arbol */
-            {
-                Nodo temp = new Nodo(M);// se crea una pagina temporal
-                temp.hijo[0] = padre;// se coloca al padre actual como hijo (ya que las paginas rompen para arriba
-                padre = temp;//el padre es el nuevo nodo
-                //inicializa valores de nueva pagina
-                padre.numclaves = 1;// nuevo padre tiene una clave inicialmente
-                padre.clave[1] = iclave;//se asigana clave el valor de cero
-                padre.hijo[1] = iclaveDhijo;// se asigna a hijo el valor de null
-            }
+            int n = 0;// n es el primer nivel del arbol que corresponde al nodo padre
+            if (BuscarNodo(x, p, ref n) == true) //busca la clave x en un nodo o pagina, se usa el metodo de abajo
+                return p;// retorna la pagina o nodo donde se encontro la clave
+
+            return Buscar(x, p.hijo[n]); /* Buscar en Nodo p.hijo[n] */
         }
 
         //este metodo busca la clave dentro de una página en particular
@@ -112,7 +101,8 @@
         {
             Mostrar(padre, 0, grafo, Relleno, rect, fuente);
             borrarArchivos();
-            guardarEnArchivo(padre, 1);
+            guardarEnArchivo(padre);
+            archivoNum = 0;
         }
 
         private void Mostrar(Nodo p, int masX, Graphics g, Brush Relleno, Rectangle rect, Font fuente)// recibe nodo y espacios entre nodos o paginas
@@ -189,6 +179,27 @@
                         }
                     }
                 }
+            }
+        }
+
+        /// <!----> FUNCIONES PARA INSERTAR <!---->
+        
+        public void Insert(int x)//ingresar una clave al arbol b
+        {
+            int iclave = 0;//clave inicial en cero
+            Nodo iclaveDhijo = null;//clave hijos en null
+
+            bool agregar = Insert(x, padre, ref iclave, ref iclaveDhijo);//metodo recursivo inserta la clave
+
+            if (agregar)  /* Altura aumentada en uno, hay que crear nueva pagina en el arbol */
+            {
+                Nodo temp = new Nodo(M);// se crea una pagina temporal
+                temp.hijo[0] = padre;// se coloca al padre actual como hijo (ya que las paginas rompen para arriba
+                padre = temp;//el padre es el nuevo nodo
+                //inicializa valores de nueva pagina
+                padre.numclaves = 1;// nuevo padre tiene una clave inicialmente
+                padre.clave[1] = iclave;//se asigana clave el valor de cero
+                padre.hijo[1] = iclaveDhijo;// se asigna a hijo el valor de null
             }
         }
 
@@ -293,6 +304,9 @@
             iclave = medianclave;
             iclaveDhijo = nuevoNodo;
         }
+
+        /// <!----> FUNCIONES DE ELIMINAR <!---->
+        /// 
         public void Borrar(int x)
         {
             if (padre == null)
@@ -342,26 +356,6 @@
             if (p.hijo[n].numclaves < MIN)
                 Restaurar(p, n);
         }
-
-        public bool Buscar(int x)//metodo que busca  una clave entera en el árbol
-        {
-            if (Buscar(x, padre) == null)// de forma recursiva busca la clave en el árbol(aca se utiliza el metodo buscar que tiene dos parametros, es e qu esta bajo)
-                return false;// si buscar retorna null significa que no se encontro el nodo
-            return true;// si buscar retorna true significa que el nodo se encuentra en el árbol
-        }
-
-        private Nodo Buscar(int x, Nodo p)//este metodo es el que recorre el arbol y busca la clave 
-        {
-            if (p == null)       /*clave x no presente en el árbol*/
-                return null;//retorna null
-
-            int n = 0;// n es el primer nivel del arbol que corresponde al nodo padre
-            if (BuscarNodo(x, p, ref n) == true) //busca la clave x en un nodo o pagina, se usa el metodo de abajo
-                return p;// retorna la pagina o nodo donde se encontro la clave
-
-            return Buscar(x, p.hijo[n]); /* Buscar en Nodo p.hijo[n] */
-        }
-        //este metodo busca la clave dentro de una página en particular
 
         private void BorrarByShift(Nodo p, int n)
         {
