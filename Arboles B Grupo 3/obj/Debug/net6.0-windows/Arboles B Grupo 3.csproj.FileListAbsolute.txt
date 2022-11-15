@@ -50,3 +50,4 @@ C:\Users\Waldir Rosa\Downloads\Arbol-B-Grupo-3-master\Arboles B Grupo 3\obj\Debu
 C:\Users\Waldir Rosa\Downloads\Arbol-B-Grupo-3-master\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.pdb
 C:\Users\Waldir Rosa\Downloads\Arbol-B-Grupo-3-master\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles B Grupo 3.genruntimeconfig.cache
 C:\Users\Waldir Rosa\Downloads\Arbol-B-Grupo-3-master\Arboles B Grupo 3\obj\Debug\net6.0-windows\ref\Arboles B Grupo 3.dll
+C:\Users\Ever Vásquez\Documents\Git_projects\Proyecto_ESD\Arbol-B-Grupo-3\Arboles B Grupo 3\obj\Debug\net6.0-windows\Arboles_B_Grupo_3.Properties.Resources.resources
