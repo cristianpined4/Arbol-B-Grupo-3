@@ -169,5 +169,12 @@ namespace Arboles_B_Grupo_3
             }
             txtClave.Focus();
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            guardar = true;//Pone en true la variable sentinela para que se permita pintar
+            Refresh();//Invoca a la función paint
+            txtClave.Focus();
+        }
     }
 }
