@@ -7,7 +7,6 @@
         //Ceiling Devuelve el valor integral más pequeño que es mayor o igual que el número decimal especificado.
         private static readonly int MIN = (int)Math.Ceiling((double)M / 2) - 1;
         private Rectangle[] arrayRect;//Arreglo de rectángulos que permiten dibujar el cuadro donde están las claves
-        // Todos los archivos ira a una carpeta dentro del proyecto llamada Archivos
         private int archivoNum;//Iterador que permite nombrar el archivo según su número de página (Ayuda en la función de "guardarEnArchivo")
 
         private Nodo padre;//Nodo padre
@@ -43,7 +42,7 @@
             }
         }
         
-        // Funcion para eliminar los archivos del directorio y array path
+        // Funcion para eliminar los archivos del directorio
         public void borrarArchivos()
         {
             DirectoryInfo di = new DirectoryInfo("../../../Archivos"); // Se obtiene la info de la ruta
