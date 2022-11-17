@@ -17,25 +17,30 @@ Lenguaje de programación usado: C#.
  ÁRBOL-B COMPLETO
 |-
 
-![Arbol-B-Completo](https://user-images.githubusercontent.com/102596002/201926785-2fc227f8-14b7-4df1-ae75-9ace58b8f2ff.jpg)
+![Arbol-B-Completo](https://user-images.githubusercontent.com/102596002/202477792-a3454454-7d6e-4767-95cc-97f452a04047.jpg)
 
 
 INSERTANDO CLAVE QUE YA EXISTE
 |-
 
-![Arbol-B-Validacion-Claves-Repetidas](https://user-images.githubusercontent.com/102596002/201927312-0cc6e2bc-1095-48a8-a815-2801811026bf.jpg)
+![Arbol-B-Validacion-Claves-Repetidas](https://user-images.githubusercontent.com/102596002/202477873-09d246c1-8cd4-4cc7-8d0f-7b8dfd97af4c.jpg)
+
 
 BUSCANDO CLAVE EXISTENTE
 |-
 
-![Arbol-B-Clave-Si-Existe](https://user-images.githubusercontent.com/102596002/201928065-db965ef3-dea5-4bd4-9eae-9ab1b8fc4b70.jpg)
+![Arbol-B-Clave-Si-Existe](https://user-images.githubusercontent.com/102596002/202477954-c62c253b-1d57-49f8-82d2-99ba5dd786a2.jpg)
+
 
 BUSCANDO CLAVE NO EXISTENTE
 |-
 
-![Arbol-B-Clave-No-Existe](https://user-images.githubusercontent.com/102596002/201928171-f60b9b8e-515b-414e-a1de-076709bfca13.jpg)
+![Arbol-B-Clave-No-Existe](https://user-images.githubusercontent.com/102596002/202478002-18d5a866-a8e0-43e5-a451-f6236d0de0ae.jpg)
+
 
 ARCHIVOS TXT POR HOJA
 |-
 
-![Arbol-B-ArchivosTXT](https://user-images.githubusercontent.com/102596002/201928922-3c9983e0-9ce9-4966-b2db-d2f8118ae6f6.jpg)
+![Arbol-B-ArchivosTXT](https://user-images.githubusercontent.com/102596002/202479081-99e3675a-3aa6-444b-911a-88018491d42b.jpg)
+
+
