@@ -95,7 +95,7 @@ namespace Arboles_B_Grupo_3
                 Rectangle rect = new Rectangle(500, 100, 30, 30);//Propiedades del cuadro donde se dibujará la clave
                 Font fuente = new Font("Arial", 14);//Fuente para dibujar la clave
                 //Llama a la función dibujar del árbol_B y pasa los parámetros necesarios
-                arbolB.Mostrar(g, Brushes.YellowGreen, rect, fuente);
+                arbolB.Mostrar(g, Brushes.YellowGreen, rect, fuente, Pens.Black);
 
                 guardar = false;//Reinicia guardar a false para esperar una nueva clave
             }

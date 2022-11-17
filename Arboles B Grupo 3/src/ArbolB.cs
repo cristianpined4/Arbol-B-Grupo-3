@@ -1,4 +1,6 @@
-﻿namespace Arboles_B_Grupo_3.src
+﻿using System.Windows.Forms;
+
+namespace Arboles_B_Grupo_3.src
 {
     internal class ArbolB
     {
@@ -8,6 +10,7 @@
         private static readonly int MIN = (int)Math.Ceiling((double)M / 2) - 1;
         private Rectangle[] arrayRect;//Arreglo de rectángulos que permiten dibujar el cuadro donde están las claves
         private int archivoNum;//Iterador que permite nombrar el archivo según su número de página (Ayuda en la función de "guardarEnArchivo")
+        private int rX;//Permite ir sumando las posiciones en x en caso que el árbol cresca con páginas hijas hacia a la derecha
 
         private Nodo padre;//Nodo padre
 
@@ -96,15 +99,16 @@
 
         /// <!----> FUNCIONES PARA DIBUJAR EL ARBOL <!---->
 
-        public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente)//metodo  que llama a metodo mostrar esto es para encapsular mas.
+        public void Mostrar(Graphics grafo, Brush Relleno, Rectangle rect, Font fuente, Pen lapiz)//metodo  que llama a metodo mostrar esto es para encapsular mas.
         {
-            Mostrar(padre, 0, grafo, Relleno, rect, fuente);
+            rX = rect.X;
+            Mostrar(padre, grafo, Relleno, rect, fuente, lapiz, rect.X, rect.Y, false, false);
             borrarArchivos();
             guardarEnArchivo(padre);
             archivoNum = 0;
         }
 
-        private void Mostrar(Nodo p, int masX, Graphics g, Brush Relleno, Rectangle rect, Font fuente)// recibe nodo y espacios entre nodos o paginas
+        private void Mostrar(Nodo p, Graphics g, Brush Relleno, Rectangle rect, Font fuente, Pen lapiz, int xant, int yant, bool derecha, bool centro)// recibe nodo y espacios entre nodos o paginas
         {
             if (p != null)// si el nodo es diferente de nulo
             {
@@ -114,11 +118,33 @@
                 int i;
                 for (i = 0; i < p.numclaves; i++)// recorre las claves que hay en cada pagina
                 {
+                    if (derecha && !centro)//Si el nodo es derecho
+                    {
+                        if (i == 0)//La linea sale del nodo izquierdo
+                        {
+                            g.DrawLine(lapiz, xant, yant, arrayRect[i].X, arrayRect[i].Y);
+                        }
+                    }
                     ///----> CREA Y DIBUJA LOS RECTANGULOS DE LA PÁGINA ACTUAL
                     //A partir de la segunda iteración se empiezan a crear todos los rectángulos partiendo de las coordenadas y tamaños del primer rectángulo
                     if (i >= 1)
                     {
                         arrayRect[i] = new Rectangle(arrayRect[i - 1].X + arrayRect[i - 1].Width, arrayRect[i - 1].Y, arrayRect[i - 1].Width, arrayRect[i - 1].Height);
+                        if (centro && !derecha)//Verifica que el nodo a unir esté al centro
+                        {
+                            if (i == (p.numclaves / 2))//La linea sale del centro del nodo hijo
+                            {
+                                g.DrawLine(lapiz, xant, yant, arrayRect[i].X - (30 * (p.numclaves / 2)) + arrayRect[i].Width, arrayRect[i].Y);
+                            }
+                        }
+                        if (!derecha && !centro)//Si el nodo no es derecho ni central, entonces es izquierdo
+                        {
+                            if (i == (p.numclaves - 1))//La linea sale de la parte derecha del último nodo a la derecha
+                            {
+                                g.DrawLine(lapiz, xant, yant, arrayRect[i].X + arrayRect[i].Width, arrayRect[i].Y);
+                            }
+
+                        }
                     }
 
                     //Se dibuja el rectángulo
@@ -147,34 +173,43 @@
                 {
                     if (p.numclaves > 1)//Caso en que hayan más de una clave en la hoja
                     {
-                        if (i == 0)//Página derecha
+                        if (i == 0)//Página izquierda
                         {
                             rect.X -= 180;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                            Mostrar(p.hijo[i], g, Relleno, rect, fuente, lapiz, rect.X + 180, rect.Y - 70, false, false);// muestra las claves de las  páginas hijas
                         }
                         else if (i == 1)//Página central
                         {
                             rect.X += 180;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                            Mostrar(p.hijo[i], g, Relleno, rect, fuente, lapiz, rect.X + (30 * (p.numclaves / 2)), rect.Y - 70, false, true);// muestra las claves de las  páginas hijas
                         }
-                        else//Página izquierda
+                        else//Página derecha
                         {
+                            rX += 180;//Aumenta en la posición X en caso que el árbol cresca con sus páginas a la derecha
                             rect.X += 180;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+
+                            if (padre.numclaves == 1)//Verifica si el nodo padre solo tiene un elemento, si es así, significa que ya rompió a almenos 2 nodos hijos y cada hijo tiene otro hijo
+                            {
+                                Mostrar(p.hijo[i], g, Relleno, rect, fuente, lapiz, (rect.X - 180) + (30 * p.numclaves), rect.Y - 70, true, false);// muestra las claves de las  páginas hijas
+                            }
+                            else//Si el árbol tiene más de una clave, significa que no ha rampido a tantas páginas
+                            {
+                                Mostrar(p.hijo[i], g, Relleno, rect, fuente, lapiz, (rX -= 180) + (30 * p.numclaves), rect.Y - 70, true, false);// muestra las claves de las  páginas hijas
+                            }
 
                         }
                     }
                     else//En caso que no, que solo
                     {
-                        if (i == 0)//Página derecha
+                        if (i == 0)//Página izquierda
                         {
                             rect.X -= 240;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                            Mostrar(p.hijo[i], g, Relleno, rect, fuente, lapiz, rect.X + 240, rect.Y - 70, false, false);// muestra las claves de las  páginas hijas
                         }
-                        else if (i == 1)//Página izquierda
+                        else if (i == 1)//Página derecha
                         {
                             rect.X += 450;//Permite que las páginas hijas no estén desordenadas (Misma distancia entre página izquierda y derecha)
-                            Mostrar(p.hijo[i], masX + 10, g, Relleno, rect, fuente);// muestra las claves de las  páginas hijas
+                            Mostrar(p.hijo[i], g, Relleno, rect, fuente, lapiz, rect.X - 180, rect.Y - 70, true, false);// muestra las claves de las  páginas hijas
                         }
                     }
                 }
