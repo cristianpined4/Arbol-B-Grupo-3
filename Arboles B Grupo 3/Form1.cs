@@ -28,7 +28,7 @@ namespace Arboles_B_Grupo_3
                     arbolB.Insert(clave);
                     guardar = true;//Pone en true para que se pueda pintar el la página
                     Refresh();//Refresca el formulario (Llama a la función que permite pintar la página)
-
+                    
                     txtClave.Clear();//Limpia las cajas de texto
                     this.Cursor = Cursors.Default;
                 }
@@ -92,11 +92,82 @@ namespace Arboles_B_Grupo_3
 
             if (guardar)//Si ya se almacenó una nueva clave, da paso a pintar ó actualizar el árbol
             {
-                ///<!----> ACÁ VA EL CÓDIGO PARA PINTAR O ACTUALIZAR EL ARBOL-B <!---->
-                ///
+                Rectangle rect = new Rectangle(500, 100, 30, 30);//Propiedades del cuadro donde se dibujará la clave
+                Font fuente = new Font("Arial", 14);//Fuente para dibujar la clave
+                //Llama a la función dibujar del árbol_B y pasa los parámetros necesarios
+                arbolB.Mostrar(g, Brushes.YellowGreen, rect, fuente);
 
                 guardar = false;//Reinicia guardar a false para esperar una nueva clave
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (txtClave.Text != "")//Verifica si las cajas de texto están llenas
+            {
+                clave = int.Parse(txtClave.Text);
+                if (clave > 0 && clave < 100)//Valida que solo sean permitidos valores de 1  a 99
+                {
+                    this.Cursor = Cursors.AppStarting;
+                    arbolB.Borrar(clave);
+                    guardar = true;//Pone en true para que se pueda pintar el la página
+                    Refresh();//Refresca el formulario (Llama a la función que permite pintar la página)
+
+                    txtClave.Clear();//Limpia las cajas de texto
+                    this.Cursor = Cursors.Default;
+                }
+                else
+                {
+                    MessageBox.Show("Solo se permiten valores entre 1 y 99...", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtClave.Clear();
+                }
+            }
+            else
+            {
+                //Si hay al menos una caja de texto que no tiene datos, muestra un mensaje de error
+                MessageBox.Show("Por favor llene todos los campos del formulario...", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            txtClave.Focus();
+        }
+
+        private void btnRecargar_Click(object sender, EventArgs e)
+        {
+            guardar = true;//Pone en true la variable sentinela para que se permita pintar
+            Refresh();//Invoca a la función paint
+            txtClave.Focus();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+            if (txtClave.Text != "")//Verifica si las cajas de texto están llenas
+            {
+                clave = int.Parse(txtClave.Text);
+                if (clave > 0 && clave < 100)//Valida que solo sean permitidos valores de 1  a 99
+                {
+                    this.Cursor = Cursors.AppStarting;
+                    if (arbolB.Buscar(clave) == true)
+                        MessageBox.Show("La clave [" + clave + "] fue encontrada en el ábol.", "CLAVE ENCONTRADA.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("La clave [" + clave + "] no se encuentra dentro del árbol...", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    guardar = true;//Pone en true para que se pueda pintar el la página
+                    Refresh();//Refresca el formulario (Llama a la función que permite pintar la página)
+
+                    txtClave.Clear();//Limpia las cajas de texto
+                    this.Cursor = Cursors.Default;
+                }
+                else
+                {
+                    MessageBox.Show("Solo se permiten valores entre 1 y 99...", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtClave.Clear();
+                }
+            }
+            else
+            {
+                //Si hay al menos una caja de texto que no tiene datos, muestra un mensaje de error
+                MessageBox.Show("Por favor llene todos los campos del formulario...", "ERROR.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            txtClave.Focus();
         }
     }
 }
