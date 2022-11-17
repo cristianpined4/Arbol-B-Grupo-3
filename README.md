@@ -41,5 +41,6 @@ BUSCANDO CLAVE NO EXISTENTE
 ARCHIVOS TXT POR HOJA
 |-
 
-![Arbol-B-ArchivosTXT](https://user-images.githubusercontent.com/102596002/202478038-597d0a62-f54b-42db-852c-02674963b25f.jpg)
+![Arbol-B-ArchivosTXT](https://user-images.githubusercontent.com/102596002/202479081-99e3675a-3aa6-444b-911a-88018491d42b.jpg)
+
 
