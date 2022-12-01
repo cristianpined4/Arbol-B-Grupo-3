@@ -7,9 +7,9 @@ Tarea #2 de Estructura de datos UES 2022.
     1 - Insertar claves en un árbol B.
     2 - Buscar claves en un árbol B.
     3 - Eliminar claves de un árbol B.
-    5 - Mostrar índices del árbol.
-    6 - Crear archivos txt por cada página del árbol.
-    7 - Mostrar el árbol gráficamente.
+    4 - Mostrar índices del árbol.
+    5 - Crear archivos txt por cada página del árbol.
+    6 - Mostrar el árbol gráficamente.
     
 Lenguaje de programación usado: C#.
 
